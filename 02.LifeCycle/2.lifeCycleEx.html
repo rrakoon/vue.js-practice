@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue Instance LifeCycle</title>
+  </head>
+
+  <body>
+    <div id="app">{{message}}</div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.2/dist/vue.js"></script>
+    <script>
+      new Vue({
+        el: "#app",
+        data: {
+          message: "hi Vue js",
+        },
+
+        //lifeCycle
+        //인스턴스 생성 -> beforeCreate -> created -> beforeMount -> mounted -> beforeUdate -> update -> beforeDistroy -> distroyed
+        beforeCreate: function () {
+          // 인스턴스가 생성되고 가장 처음 실행되는 라이프 사이클
+          // data속성과 method속성이 아직 인스턴스에 정의 X, DOM등 화면요소에 접근 X
+          console.log("beforeCreate");
+        },
+        created: function () {
+          //data속성과 methods속성이 정의되어 this.data or this.fetchData()같은 로직 이용해
+          //data속성과 methods속성에 정의된 값에 접근하여 로직실행.
+          //화면에 부착전이라 template속성에 정의된 DOM 요소에 접근 X
+          console.log("created");
+        },
+        mounted: function () {
+          //el속성에서 지정한 화면요소에 인스턴스 부착되고 호출되는 단계
+          //template속성에 정의한 DOM에 접근할수잇어 요소 제어 로직 수행 좋은단계.
+          //DOM인스턴스가 부착되자마자 호출되기에 하위 컴포넌트나 외부 라이브러리에 추가된 화면요소들이
+          //최종 HTML코드로 변환되는 시점과 다를수 있음.
+          //변환되는 시점이 다를경우 $nextTick() API를 활용하여 HTML코드로 변환(파싱) 될 때까지 기다린 후 제어로직 추가.
+          console.log("mounted");
+          this.message = "hello vue";
+        },
+        updated: function () {
+          //데이터가 변경되고나서 가상 DOM으로 다시 화면그리고 실행되는 단계
+          //이 단계에서 데이터값을 변경하려면 무한루프에 빠질수 있기에
+          //값 변경시 computed, watch 같은 속성 사용.
+          //가급적 데이터값 갱신로직은 beforeUpdate에 추가하고 updated에서는 DOM과 관련로직추가하는것이 좋음.
+          console.log("updated");
+        },
+      });
+    </script>
+  </body>
+</html>
