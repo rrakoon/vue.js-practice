@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue components registration</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.2/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <button>컴포넌트 등록</button>
+      <my-component></my-component>
+      <!-- 지역 컴포넌트 표시 -->
+    </div>
+  </body>
+  <script>
+    //components => 화면을 구성할 수 있는 블록(특정영역)을 의미함. 일괄적인 패턴으로 개발가능.
+    Vue.component("my-component", {
+      template: "<div>전역컴포넌트 등록 됨.</div>",
+      //전역 컴포넌트 등록. my-componet->div로 태그 변경됨.
+    });
+    let cmp = {
+      template: "<div>지역컴포넌트 등록</div>",
+    };
+    new Vue({
+      el: "#app",
+      components: {
+        "my-component": cmp,
+      },
+    });
+  </script>
+</html>
