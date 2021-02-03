@@ -10,9 +10,14 @@
     <div id="app">
       <my-component1></my-component1>
       <my-component2> </my-component2>
+      <!-- <child-component v-bind:props 속성이름="상위컴포넌트 data속성"></child-component> -->
     </div>
   </body>
   <script>
+    //   Vue.component('child-component'{
+    //     props:['props속성이름'],
+    //   });
+
     let cmp1 = {
       template: "<div>첫번쨰 로컬 컴포넌트 : {{cmp1Data}}</div>",
       data: function () {
@@ -25,7 +30,10 @@
       template: "<div>두번쨰 로컬 컴포넌트 : {{cmp2Data}}</div>",
       data: function () {
         return {
-          cmp2Data: cmp1.data.cmp1Data,
+          cmp2Data: cmp1.data.cmp1Data, //컴포넌트 유효범위때문에 컴포넌트1에서 컴포넌트2로 직접참조 불가.
+          //그러므로 베이직 데이터 전달방식은 상위-하위 컴포넌트간 전달방법이다.
+          //상위->하위 : props 속성을 전달한다.
+          //하위->상위 : event만 전달.
         };
       },
     };

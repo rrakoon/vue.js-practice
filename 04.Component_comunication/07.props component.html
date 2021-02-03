@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>props</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.2/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <!-- <child-component v-bind:props 속성이름="상위컴포넌트 data속성"></child-component> -->
+      <!-- 4. child-compoent tag 정의. v-bind속성으로 상위 컴포넌트의 message 속성값을 하위 컴포넌트의 propsdata로 전달. -->
+      <child-component v-bind:propsdata="message"></child-component>
+    </div>
+  </body>
+  <script>
+    //2.Vue.component()를 이용해 하위 컴포넌트 child-component등록.
+    Vue.component("child-component", {
+      //3.child-component에 props속성으로 propsdata정의
+      props: ["propsdata"],
+      //5. 상위 컴포넌트의 데이터 속성값을 바인드
+      template: "<p>{{ propsdata }}</p>",
+    });
+    //1. Vue Instance create 상위 컴포넌트.
+    //props를 통해 데이터를 child-component로 전달.
+    new Vue({
+      el: "#app",
+      data: {
+        message: "Hello vue! passed from Parent Component",
+      },
+    });
+  </script>
+</html>
