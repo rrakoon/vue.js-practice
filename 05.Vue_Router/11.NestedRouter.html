@@ -4,6 +4,60 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Nested Router/Named Vue</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.2/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router@3.0.1/dist/vue-router.js"></script>
   </head>
-  <body></body>
+  <body>
+    <div id="app">
+      <h1>Nested Router</h1>
+      <router-link to="/user">UserComponent</router-link>
+      <router-link to="/user/post">UserPostComponent</router-link>
+      <router-link to="/user/profile">UserProfileComponent</router-link>
+      <!-- User Component뿌려질 영역 -->
+      <router-view></router-view>
+    </div>
+  </body>
+  <script>
+    //Nested Router
+    //라우터로 페이지를 이동할떄 최소 2개이상의 컴포넌트를 화면에 나타냄
+    //상위 컴포넌트 1개에 하위컴포넌트 1개이상을 포함하는 구조로 구성됨.
+    //화면구성시 컴포넌트수가 적을때 유리함.
+
+    let User = {
+      template: `
+        <div>
+            User Component
+            <router-view></router-view>    
+        </div>`,
+    };
+
+    let UserProfile = {
+      template: "<p>UserProfile Component</p>",
+    };
+    let UserPost = {
+      template: "<p>UserPost Componet</p>",
+    };
+
+    //Define Nested Router
+    let routes = [
+      {
+        path: "/user",
+        component: User,
+        children: [
+          { path: "Profile", component: UserProfile },
+          { path: "Post", component: UserPost },
+        ],
+      },
+    ];
+
+    //Define Vue Router
+    let router = new VueRouter({
+      routes,
+    });
+
+    //Vue Instance
+    let app = new Vue({
+      router,
+    }).$mount("#app");
+  </script>
 </html>

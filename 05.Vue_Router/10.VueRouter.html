@@ -24,7 +24,7 @@
     //   <router-link to ="Url값"/> page이동 태그 <a>태그와 같음
     //   <router-view/> page표시 태그. 변경되는 URL에 따라 해당 컴포넌트 뿌리는 영역
 
-    //Defind Component
+    //Define Component
     let Main = {
       template: "<div>Main</div>",
     };
@@ -38,13 +38,13 @@
       { path: "/login", component: Login },
     ];
 
-    //Defind Router
+    //Define Router
     let router = new VueRouter({
       //   mode: "history", //RouterUrl의 #(해시값)을 없에는 법으로 히스토리모드를 활용하면됨
       routes,
     });
 
-    //Defind Vue Instance
+    //Define Vue Instance
     let app = new Vue({
       router,
     }).$mount("#app");
