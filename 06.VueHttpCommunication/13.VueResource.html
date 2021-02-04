@@ -20,6 +20,7 @@
         getData: function () {
           //Vue Resource에서 제공하는 API this.$http.get()으로 데이터 받아오고 .then안에서 응답된 데이터response확인
           this.$http.get(`https://raw.githubusercontent.com/joshua1988/doit-vuejs/master/data/demo.json`).then(function (response) {
+            console.log("tpyeof response :", typeof response);
             console.log("response", response);
             console.log("Response Data", JSON.parse(response.data));
           });

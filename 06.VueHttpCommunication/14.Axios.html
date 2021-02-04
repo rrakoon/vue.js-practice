@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Axios</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.2/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <button v-on:click="getData">프레임 워크 목록 가져오기</button>
+    </div>
+  </body>
+  <script>
+    //Axios
+    //Vue에서 가장 많이 사용되는 HTTP통신 라이브러리
+    //Promise기반의 API형식이 제공되고 별도 로직 구현필요없이 주어진 API로 로직 구현가능.
+    //Promise는 서버에 데이터를 요청하여 받아오는 동작과 같은 비동기 로직 처리에 유용한 JS객체
+    //JS는 단일 스레드로 코드 처리하기에 특정 로직 처리가 끝날때까지 기다리지 않는다.
+    //따라서 데이터를 요청하고 받아올 떄까지 기다렸다 화면에 나타내는 로직을 실행해야될때 Promise사용.
+    //데이터를 받아왔을때 Promise로 데이터를 화면에 표시하거나 연산을 수행하는 로직 수행.
+
+    //HTTP GET요청
+    // axios.get('Url주소').then().catch();
+    // 해당 URL주소에 대해 HTTP GET요청 보냄.
+    // 데이터를 정상적으로 받아오면 then()안에 정의한 로직이 실행됨
+    // 데이터를 받을 떄 오류나면 catch()안에 정의된 로직 실행.
+
+    //HTTP POST요청
+    // axios.post('Url주소').then().catch();
+    // 위와 동일.
+
+    //HTTP 요청에 대한 옵션 속성정의
+    // axios({
+    //   method: "get",
+    //   url: "url주소",
+    //      ...
+    // });
+    //HTTP요청에 대한 속성을 직접 정의하여 보낼수도 있다.
+    //데이터 요청을 보낼 Url, HTTP요청방식, 보내는 데이터 유형 등등.
+    //https://github.com/axios/axios#axios-api 참고
+
+    new Vue({
+      el: "#app",
+      methods: {
+        getData: function () {
+          axios
+            .get(`https://raw.githubusercontent.com/joshua1988/doit-vuejs/master/data/demo.json`)
+            .then(function (response) {
+              console.log("typeof response : ", typeof response);
+              console.log("Response", response);
+              // console.log("Response data", JSON.parse(response.data);
+              //data 속성이 String이 아닌 Object이므로 JSON.parse로 객체 변환 할 필요가 없다.
+            })
+            .catch();
+        },
+      },
+    });
+  </script>
+</html>
