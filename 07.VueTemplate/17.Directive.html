@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Directive</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.2/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/vue-router@3.0.1/dist/vue-router.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <a v-if="flag">Vue.js check</a>
+      <!-- flag = true시 보임 -->
+      <ul>
+        <!-- angular ng-repeat="system in systems 와 같음" -->
+        <li v-for="system in systems">{{system}}</li>
+        <!-- data갯수만큼 li태그 반복 -->
+      </ul>
+      <p v-show="flag">True시 보임</p>
+      <!-- v-if와 같이 안보이지만 element에 display:none으로 남음. -->
+      <h5 v-bind:id="uid">Vue 입문</h5>
+      <!-- id == rrakoon bind -->
+      <h5 v-bind:id="uid">{{uid}}</h5>
+      <!-- id == rrakoon bind -->
+      <button v-on:click="popupAlert">Alert</button><br />
+      <input v-model="model" value="model" />
+    </div>
+  </body>
+  <script>
+    //Vue template
+    //HTML, CSS등 MarkUp 속성과 Vue Instance에서 정의한 데이터 및 로직을 연결하여 HTML형태로 변환해주는 속성.
+    //template속성에서 정의한 MarkUp+Vue data를 render()함수로 변환된다.
+    //render()는 최종적으로 사용자가 볼수 있게 화면을 그린다.
+
+    //template에서 사용하는 Vue속성과 문법
+    //1.Data binding 2.JS Expression 3. Directive 4. Event 5. Template technique
+
+    //3. Directive
+    //HTML 태그안에 v-접두사를 가지는 모든 속성들을 의미함.
+    // v-if : 지정한 뷰 데이터값의 참,거짓에 따라 HTML태그를 화면에 표시하거나 표시x
+    // v-for : 지정한 뷰 데이터의 갯수만큼 HTML태그 반복 출력. angular ng-repeat과 같음.
+    // v-show : v-if와 유사. 데이터 진위여부에 따라 해당 HTML태그를 화면에 표시하거나 표시 x
+    //          다만 v-if는 해당태그를 완전 삭제하지만 v-show는 CSS효과만 display:none으로 주어 실제 태그는 남아있지만 화면에 표시 x
+    // v-bind : HTML 태그 기본 속성과 뷰 데이터 속성을 연결함.
+    // v-on : 화면요소의 이벤트를 감지하여 처리할떄 사용. ex v-on:click
+    // v-model : form에서 주로 사용되는 속성. form에 입력한 값을 뷰 인스턴스의 데이터와 즉시 동기화함.
+    //           화면에 입력된 값을 저장하여 서버에 보내거나 watch같은 속성을 이용하여 추가 로직을 수행가능.
+    //           <input>, <select>, <textarea>태그에만 사용 가능.
+
+    new Vue({
+      el: "#app",
+      data: {
+        flag: true,
+        systems: ["android", "ios", "window", "linux", "unix"],
+        uid: "rrakoon",
+        model: "v-model",
+      },
+      methods: {
+        popupAlert: function () {
+          return alert("Alert Popup");
+        },
+      },
+    });
+  </script>
+</html>

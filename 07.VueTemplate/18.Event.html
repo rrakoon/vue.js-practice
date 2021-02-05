@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Event</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.2/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/vue-router@3.0.1/dist/vue-router.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <button v-on:click="clickBtn">Click1</button>
+    </div>
+    <div id="app1">
+      <button v-on:click="clickBtn(10)">Click2</button>
+    </div>
+    <div id="app2">
+      <button v-on:click="clickBtn">Click3</button>
+    </div>
+  </body>
+  <script>
+    //Vue template
+    //HTML, CSS등 MarkUp 속성과 Vue Instance에서 정의한 데이터 및 로직을 연결하여 HTML형태로 변환해주는 속성.
+    //template속성에서 정의한 MarkUp+Vue data를 render()함수로 변환된다.
+    //render()는 최종적으로 사용자가 볼수 있게 화면을 그린다.
+
+    //template에서 사용하는 Vue속성과 문법
+    //1.Data binding 2.JS Expression 3. Directive 4. Event 5. Template technique
+
+    //4.Event
+    //Vue에서 이벤트 처리를 v-on과 methods속성 활용함.
+    new Vue({
+      el: "#app",
+      methods: {
+        clickBtn: function () {
+          alert("clicked");
+        },
+      },
+    });
+    new Vue({
+      el: "#app1",
+      methods: {
+        clickBtn: function (num) {
+          alert("clicked " + num + " times");
+        },
+      },
+    });
+    new Vue({
+      el: "#app2",
+      methods: {
+        clickBtn: function (event) {
+          console.log("event :", event);
+        },
+      },
+    });
+  </script>
+</html>

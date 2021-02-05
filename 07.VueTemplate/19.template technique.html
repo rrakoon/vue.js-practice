@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Template Technique</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.2/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/vue-router@3.0.1/dist/vue-router.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <h3>methods</h3>
+      <p>{{message}}</p>
+      <button v-on:click="reverseMsg">문자열 역순.</button>
+    </div>
+    <div id="app1">
+      <h3>computed</h3>
+      <p>{{reverseMessage}}</p>
+    </div>
+    <div id="app2">
+      <h3>watch</h3>
+      <input v-model="message" />
+      <div>{{message}}</div>
+    </div>
+  </body>
+  <script>
+    //Vue template
+    //HTML, CSS등 MarkUp 속성과 Vue Instance에서 정의한 데이터 및 로직을 연결하여 HTML형태로 변환해주는 속성.
+    //template속성에서 정의한 MarkUp+Vue data를 render()함수로 변환된다.
+    //render()는 최종적으로 사용자가 볼수 있게 화면을 그린다.
+
+    //template에서 사용하는 Vue속성과 문법
+    //1.Data binding 2.JS Expression 3. Directive 4. Event 5. Template technique
+
+    //5. Tempalte technique
+    // 기본적으로 data binding, directive에 사용.
+
+    //5-1 computed
+    // 데이터 연산들을 정의하는 영역에서 사용.
+    // computed는 data 속성값의 변화에 따라 자동으로 다시 연산함.
+    // 캐싱기능이 있어 동일한 연산을 반복해서 하지 않기 위해 연산결과값을 미리 저장하고 필요할 때 불러옴.
+
+    //computed와 methods 차이
+    // methods는 호출할 때만 해당 로직 수행됨. 수동.
+    // computed는 대상의 데이터의값이 변경되면 자동적으로 수행됨. 능동.
+    new Vue({
+      el: "#app",
+      data: {
+        message: "Hi rrakoon Welcome to Vue.js methods",
+      },
+      //클릭시에만 역순변경.
+      methods: {
+        reverseMsg: function () {
+          this.message = this.message.split("").reverse().join("");
+          return this.message;
+        },
+      },
+    });
+
+    new Vue({
+      el: "#app1",
+      data: {
+        message: "Hi rrakoon Welcome to Vue.js computed",
+      },
+      computed: {
+        reverseMessage: function () {
+          return this.message.split("").reverse().join("");
+        },
+      },
+    });
+
+    //5-2 watch속성
+    // 데이터 변화를 감지하여 자동으로 특정 로직을 수행하는 것.
+    // computed는 내장API를 활용한 간단한 연산에 적합하지만
+    // watch는 데이터 호출같은 비동기 처리에 적합함.
+
+    new Vue({
+      el: "#app2",
+      data: {
+        message: "Hi rrakoon",
+      },
+      watch: {
+        message: function (data) {
+          console.log("message값 변경 :", data);
+        },
+      },
+    });
+  </script>
+</html>
