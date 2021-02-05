@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JS Expression</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.2/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/vue-router@3.0.1/dist/vue-router.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <p>{{message}}</p>
+      <p>{{message+'!!!'}}</p>
+      <p>{{message.split('').reverse().join('')}}</p>
+    </div>
+
+    <div id="app1">
+      <!-- <p>{{let a = 10;}}</p> -->
+      <!--X 선언문 사용불가 -->
+      <!-- <p>{{if(true) {return 100}}}</p> -->
+      <!--X 분기문 사용불가 -->
+      <p>{{true ? 100 : 0}}</p>
+      <!--O 3항연산자 사용가능. -->
+      <p>{{message.split('').reverse().join('')}}</p>
+      <!--O. 다만 복잡한 연산은 인스턴스안에서 해결해야됨. -->
+      <p>{{reversedMessage}}</p>
+      <!--O  스크립트에서 computed 속성으로 계산후 최종값만 표현 -->
+    </div>
+  </body>
+  <script>
+    //Vue template
+    //HTML, CSS등 MarkUp 속성과 Vue Instance에서 정의한 데이터 및 로직을 연결하여 HTML형태로 변환해주는 속성.
+    //template속성에서 정의한 MarkUp+Vue data를 render()함수로 변환된다.
+    //render()는 최종적으로 사용자가 볼수 있게 화면을 그린다.
+
+    //template에서 사용하는 Vue속성과 문법
+    //1.Data binding 2.JS Expression 3. Directive 4. Event 5. Template technique
+
+    //2. JS Expression
+    // Vue template에서도 JS표현식 사용 가능. {{}}안에 JS 표현식을 넣으면 됨.
+    // JS표현식 주의 사항
+    // 1. JS선언문과 분기구문 사용불가.
+    // 2. 복잡한 연산은 인스턴스 안에서 처리하고 화면에는 간단한 연산결과만 표현해야된다.
+    let app = new Vue({
+      el: "#app",
+      data: {
+        message: "Hello Vue.js!",
+      },
+      //   데이터 속성을 자동으로 계산해주는 속성
+      computed: {
+        reversedMessage: function () {
+          return this.message.split("").reverse().join("");
+        },
+      },
+    });
+    let app1 = new Vue({
+      el: "#app1",
+      data: {
+        message: "Hi Vue.js!",
+      },
+      //   데이터 속성을 자동으로 계산해주는 속성
+      computed: {
+        reversedMessage: function () {
+          return this.message.split("").reverse().join("");
+        },
+      },
+    });
+  </script>
+</html>
